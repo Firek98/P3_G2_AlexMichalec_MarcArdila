@@ -15,7 +15,6 @@ public:
 	Map(int diff);
 	~Map();
 	void Modify(int column, int row, char newc);
-	void printMap();
 	void printColoredMap();
 	int rows();
 	int columns();
