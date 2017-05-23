@@ -1,13 +1,32 @@
 #include "Map.h"
 #include <stdlib.h>
 #include <iostream>
+#include <fstream>
 
 //CONSTRUCTOR DEL MAPA//
 
 Map::Map()
 {
+	std::ifstream fentrada("default.cfg");
+
+	NUM_COLUMNS = 74;
+	NUM_ROWS = 36;
+
+	for (int i = 0; i < NUM_ROWS; i++) 
+	{
+
+		md[i] = new char[NUM_COLUMNS];
+	}
+	for (int i = 0; i < NUM_ROWS; i++) {
+		for (int j = 0; j < NUM_COLUMNS; j++)
+		{
+			fentrada >> md[NUM_COLUMNS][NUM_ROWS]; //NO LO SE
+		}
+	}
+
 
 }
+
 
 
 Map::~Map()
