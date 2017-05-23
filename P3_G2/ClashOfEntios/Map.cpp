@@ -4,7 +4,7 @@
 
 //CONSTRUCTOR DEL MAPA//
 
-Map::Map(int diff)
+Map::Map()
 {
 
 }

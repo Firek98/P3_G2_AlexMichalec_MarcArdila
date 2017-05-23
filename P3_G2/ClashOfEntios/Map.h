@@ -12,7 +12,7 @@ private:
 
 public:
 
-	Map(int diff);
+	Map();
 	~Map();
 	void Modify(int column, int row, char newc);
 	void printColoredMap();
