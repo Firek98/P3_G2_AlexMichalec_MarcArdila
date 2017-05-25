@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <string>
+#include "Renderer.hh"
 
 //CONSTRUCTOR DEL MAPA//
 
@@ -11,18 +13,14 @@ Map::Map()
 
 	NUM_COLUMNS = 74;
 	NUM_ROWS = 36;
-
+	md = new char*[NUM_ROWS];
 	for (int i = 0; i < NUM_ROWS; i++) 
 	{
-
 		md[i] = new char[NUM_COLUMNS];
+		fentrada.getline(md[i], NUM_COLUMNS);
 	}
-	for (int i = 0; i < NUM_ROWS; i++) {
-		for (int j = 0; j < NUM_COLUMNS; j++)
-		{
-			fentrada >> md[NUM_COLUMNS][NUM_ROWS]; //NO LO SE
-		}
-	}
+	
+
 
 
 }
@@ -49,9 +47,16 @@ void Map::printColoredMap()
 
 		for (int j = 0; j < NUM_COLUMNS; j++)
 		{
-			std::cout << md[i][j];
+			if (md[i][j] == 'X')
+				enti::cout << enti::Color::LIGHTRED << md[i][j] << ' ';
+			else if (md[i][j] == 'O')
+				enti::cout << enti::Color::LIGHTCYAN << md[i][j] << ' ';
+			else if (md[i][j] == ':')
+				enti::cout << enti::Color::LIGHTGREEN << md[i][j] << ' ';
+			else
+				enti::cout << enti::Color::WHITE << md[i][j] << ' ';			 
 		}
-		std::cout << std::endl;
+		enti::cout << enti::endl;
 	}
 }
 
