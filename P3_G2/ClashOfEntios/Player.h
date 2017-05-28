@@ -13,5 +13,3 @@ public:
 	coord Coords;
 
 };
-};
-
