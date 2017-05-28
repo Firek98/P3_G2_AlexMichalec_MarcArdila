@@ -7,6 +7,8 @@
 void main()
 {
 	Map mapa;
+	Player player(mapa);
 	mapa.printColoredMap();
 	enti::cout << enti::cend;
+	
 }

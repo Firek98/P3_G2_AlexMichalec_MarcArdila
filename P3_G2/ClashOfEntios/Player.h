@@ -1,15 +1,35 @@
 #pragma once
 #include <conio.h>
 #include "Input.inl.hh"
+#include "Map.h"
+struct properties
+{
+	int hp;
+	char value;
+	int x;
+	int y;
+};
+struct player
+{
+	properties a;
+	properties b;
+	properties c;
+	properties d;
+	properties e;
+	properties f;
+};
+
 class Player
 {
+	
 
 public:
 	Player(Map m);
 	~Player();
-	void pos();
 	void movement(enti::InputKey tecla);
 	Map &map;
-	coord Coords;
+	player Player1;
+	player Player2;
+	void turn();
 
 };
