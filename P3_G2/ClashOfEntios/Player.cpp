@@ -110,5 +110,3 @@ bool Player::isActive()
 {
 	return active;
 }
-
-
