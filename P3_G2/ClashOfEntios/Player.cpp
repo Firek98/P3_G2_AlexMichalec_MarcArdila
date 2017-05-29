@@ -86,12 +86,18 @@ void Player::movement(enti::InputKey tecla) //WIP
 		}
 		break;
 	case enti::InputKey::D:
-		if (Coords.y < (map.columns() - 1) && map.md2(Coords.x + 1, Coords.y) != 'X' && map.md2(Coords.x + 1, Coords.y) != 'O') {
+		if (Coords.y < (map.columns() - 1) && (map.md2(Coords.x + 1, Coords.y) == '.' || map.md2(Coords.x + 1, Coords.y) == ':')) {
 
 			Coords.y++;
 			map.Modify(Coords.x, Coords.y, value);
-			
-			map.Modify(Coords.x, Coords.y - 1, '.');
+			if (map.md2(Coords.x, Coords.y - 1) == '.')
+			{
+				map.Modify(Coords.x, Coords.y - 1, '.');
+			}
+			else if (map.md2(Coords.x, Coords.y - 1) == ':')
+			{
+				map.Modify(Coords.x, Coords.y - 1, ':');
+			}
 		}
 		break;
 
