@@ -2,34 +2,27 @@
 #include <conio.h>
 #include "Input.inl.hh"
 #include "Map.h"
-struct properties
-{
-	int hp;
-	char value;
+
+struct coords {
 	int x;
 	int y;
-};
-struct player
-{
-	properties a;
-	properties b;
-	properties c;
-	properties d;
-	properties e;
-	properties f;
 };
 
 class Player
 {
-	
+	char value;
+	int hp;
+	coords Coords;
+	bool active;
+
 
 public:
-	Player(Map m);
+	Player(Map m, char a);
 	~Player();
 	void movement(enti::InputKey tecla);
 	Map &map;
-	player Player1;
-	player Player2;
-	void turn();
+	bool isActive();
+
+
 
 };
