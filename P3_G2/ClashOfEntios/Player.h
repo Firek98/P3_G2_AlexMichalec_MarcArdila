@@ -15,7 +15,6 @@ class Player
 	coords Coords;
 	bool active;
 
-	char aux;
 
 public:
 	Player(Map m, char a);

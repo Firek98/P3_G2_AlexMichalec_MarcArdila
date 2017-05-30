@@ -24,7 +24,7 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 	}
 }
 
-void setActivePlayer(std::vector<Player*> a)
+void setActivePlayer(std::vector<Player*> a, int actual)
 {
 	int max = 0;
 	int maxind = 0;
@@ -35,11 +35,20 @@ void setActivePlayer(std::vector<Player*> a)
 			max = a[i]->playerHp();
 			maxind = i;
 		}
+		
 		else if (a[i]->playerHp() == max)
 		{
-			max = a[i]->playerHp();
-			maxind = i;
-			i = a.size();
+			for (int i = 0; i < a.size(); i++)
+			{
+				if (a[i]->playerHp() == max && i != actual)
+				{
+					maxind = i;
+				}
+				else if (i == actual)
+				{
+					i++;
+				}
+			}
 		}
 	}
 	a[maxind]->setActive(true);
@@ -60,6 +69,7 @@ void main()
 {
 	enti::InputKey Tecla;
 	Map mapa;
+	int activePlayer;
 
 	Player *player_a = new Player(mapa, 'A');
 	Player *player_b = new Player(mapa, 'B');
@@ -78,16 +88,21 @@ void main()
 	std::vector<Player*>Player2{ player_1, player_2, player_3, player_4, player_5, player_6 };
 	Player1[0]->setActive(true);
 	Player2[0]->setActive(true);
-	//mapa.printColoredMap();
+	mapa.printColoredMap();
 	enti::cout << enti::cend;
 	do {
 		Tecla = enti::getInputKey();
 		if (Tecla != enti::InputKey::NONE)
 		{
-			Player1[0]->movement(Tecla);
+			activePlayer = checkActive(Player1);
+			Player1[activePlayer]->movement(Tecla);
+			if (Tecla == enti::InputKey::SPACEBAR)
+			{
+				setActivePlayer(Player1, activePlayer);
+			}
 			checkAlive(Player1, Player2);
 			system("cls");
-		//	mapa.printColoredMap();
+			mapa.printColoredMap();
 			enti::cout << enti::cend;
 		}
 	} while (Player1.empty() == false || Player2.empty() == false);

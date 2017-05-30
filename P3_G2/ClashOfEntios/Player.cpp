@@ -12,7 +12,6 @@ Player::Player(Map m, char a) : map(m)
 {
 	value = a;
 	hp = 10;
-	aux = '.';
 	for (int i = 0; i < map.rows(); i++)
 	{
 		for (int j = 0; j < map.columns(); j++)
@@ -35,7 +34,7 @@ Player::~Player()
 
 void Player::movement(enti::InputKey tecla)
 {
-
+	char aux = '.';
 		switch (tecla)
 		{
 		case enti::InputKey::NONE:
@@ -95,7 +94,8 @@ void Player::movement(enti::InputKey tecla)
 				map.Modify(Coords.x, Coords.y, value);
 			}
 			break;
-
+		case enti::InputKey::SPACEBAR:
+			active = false;
 		default:
 			break;
 		}
