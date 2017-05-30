@@ -106,7 +106,24 @@ void Player::movement(enti::InputKey tecla) //WIP
 	}
 }
 
-bool Player::isActive()
+bool Player::isActive(bool a)
 {
-	return active;
+	return a;
+}
+
+void Player::attack()
+{
+	
+}
+
+bool Player::isAlive()
+{
+	if (hp <= 0)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
