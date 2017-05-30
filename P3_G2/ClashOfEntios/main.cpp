@@ -24,7 +24,31 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 	}
 }
 
+void setActivePlayer(std::vector<Player*> a)
+{
+	int max = 0;
+	int maxind = 0;
+	for (int i = 0; i < a.size(); i++)
+	{
+		if (a[i]->playerHp() > max)
+		{
+			max = a[i]->playerHp();
+			maxind = i;
+		}
+	}
+	a[maxind]->setActive(true);
+}
 
+int checkActive(std::vector<Player*>a)
+{
+	for (int i = 0; i < a.size(); i++)
+	{
+		if (a[i]->isActive == true)
+		{
+			return i;
+		}
+	}
+}
 
 void main()
 {
@@ -46,8 +70,8 @@ void main()
 
 	std::vector<Player*>Player1{ player_a, player_b, player_c, player_d, player_e, player_f };
 	std::vector<Player*>Player2{ player_1, player_2, player_3, player_4, player_5, player_6 };
-//comprobar con iterador si se puede mover
-
+	Player1[0]->setActive(true);
+	Player2[0]->setActive(true);
 	mapa.printColoredMap();
 	do {
 		Tecla = enti::getInputKey();

@@ -21,9 +21,11 @@ public:
 	~Player();
 	void movement(enti::InputKey tecla);
 	Map &map;
-	bool isActive(bool a);
+	void setActive(bool a);
 	void attack();
+	int playerHp();
 	bool isAlive();
+	bool isActive();
 
 
 };
