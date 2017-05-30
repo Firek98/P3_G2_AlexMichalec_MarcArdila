@@ -35,6 +35,12 @@ void setActivePlayer(std::vector<Player*> a)
 			max = a[i]->playerHp();
 			maxind = i;
 		}
+		else if (a[i]->playerHp() == max)
+		{
+			max = a[i]->playerHp();
+			maxind = i;
+			i = a.size();
+		}
 	}
 	a[maxind]->setActive(true);
 }
@@ -43,7 +49,7 @@ int checkActive(std::vector<Player*>a)
 {
 	for (int i = 0; i < a.size(); i++)
 	{
-		if (a[i]->isActive == true)
+		if (a[i]->isActive() == true)
 		{
 			return i;
 		}
@@ -73,14 +79,17 @@ void main()
 	Player1[0]->setActive(true);
 	Player2[0]->setActive(true);
 	mapa.printColoredMap();
+	enti::cout << enti::cend;
 	do {
 		Tecla = enti::getInputKey();
 		if (Tecla != enti::InputKey::NONE)
 		{
+			Player1[0]->movement(Tecla);
 			checkAlive(Player1, Player2);
 			system("cls");
 			mapa.printColoredMap();
+			enti::cout << enti::cend;
 		}
-	} while (Player1.empty() || Player2.empty());
+	} while (Player1.empty() == false || Player2.empty() == false);
 	
 }

@@ -10,7 +10,7 @@
 
 Player::Player(Map m, char a) : map(m)
 {
-	a = value;
+	value = a;
 	hp = 10;
 	for (int i = 0; i < map.rows(); i++)
 	{
@@ -32,7 +32,7 @@ Player::~Player()
 
 
 
-void Player::movement(enti::InputKey tecla) //WIP
+void Player::movement(enti::InputKey tecla)
 {
 
 		switch (tecla)
