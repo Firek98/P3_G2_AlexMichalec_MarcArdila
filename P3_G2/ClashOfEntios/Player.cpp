@@ -12,6 +12,7 @@ Player::Player(Map m, char a) : map(m)
 {
 	value = a;
 	hp = 10;
+	aux = '.';
 	for (int i = 0; i < map.rows(); i++)
 	{
 		for (int j = 0; j < map.columns(); j++)
@@ -40,65 +41,58 @@ void Player::movement(enti::InputKey tecla)
 		case enti::InputKey::NONE:
 			break;
 		case enti::InputKey::W:
-			if (Coords.x > 0 && (map.md2(Coords.x, Coords.y - 1) == '.' || map.md2(Coords.x, Coords.y - 1) == ':')) {
-
+			if (Coords.x > 0 && (map.md2(Coords.x - 1, Coords.y) == '.' || map.md2(Coords.x - 1, Coords.y) == ':')) {
+				
+				map.Modify(Coords.x, Coords.y, aux);
 				Coords.x--;
-				map.Modify(Coords.x, Coords.y, value);
-				if (map.md2(Coords.x + 1, Coords.y) == '.')
+
+				if (aux != map.md2(Coords.x, Coords.y))
 				{
-					map.Modify(Coords.x + 1, Coords.y, '.');
-				}
-				else if (map.md2(Coords.x + 1, Coords.y) == ':')
-				{
-					map.Modify(Coords.x + 1, Coords.y, ':');
+					aux = map.md2(Coords.x, Coords.y);
 				}
 
+				map.Modify(Coords.x, Coords.y, value);
 			}
 			break;
 		case enti::InputKey::A:
-			if (Coords.y > 0 && (map.md2(Coords.x - 1, Coords.y) == '.' || map.md2(Coords.x - 1, Coords.y) == ':')) {
+			if (Coords.y > 0 && (map.md2(Coords.x, Coords.y - 1) == '.' || map.md2(Coords.x, Coords.y - 1) == ':')) {
 
+				map.Modify(Coords.x, Coords.y, aux);
 				Coords.y--;
-				map.Modify(Coords.x, Coords.y, value);
-				if (map.md2(Coords.x, Coords.y + 1) == '.')
+
+				if (aux != map.md2(Coords.x, Coords.y))
 				{
-					map.Modify(Coords.x, Coords.y + 1, '.');
-				}
-				else if (map.md2(Coords.x, Coords.y + 1) == ':')
-				{
-					map.Modify(Coords.x, Coords.y + 1, ':');
+					aux = map.md2(Coords.x, Coords.y);
 				}
 
+				map.Modify(Coords.x, Coords.y, value);
 			}
 			break;
 		case enti::InputKey::S:
-			if (Coords.x < (map.rows() - 1) && (map.md2(Coords.x, Coords.y + 1) == '.' || map.md2(Coords.x, Coords.y + 1) == ':')) {
+			if (Coords.x < (map.rows() - 1) && (map.md2(Coords.x + 1, Coords.y) == '.' || map.md2(Coords.x + 1, Coords.y) == ':')) {
 
+				map.Modify(Coords.x, Coords.y, aux);
 				Coords.x++;
+
+				if (aux != map.md2(Coords.x, Coords.y))
+				{
+					aux = map.md2(Coords.x, Coords.y);
+				}
+
 				map.Modify(Coords.x, Coords.y, value);
-				if (map.md2(Coords.x - 1, Coords.y) == '.')
-				{
-					map.Modify(Coords.x - 1, Coords.y, '.');
-				}
-				else if (map.md2(Coords.x - 1, Coords.y) == ':')
-				{
-					map.Modify(Coords.x - 1, Coords.y, ':');
-				}
 			}
 			break;
 		case enti::InputKey::D:
-			if (Coords.y < (map.columns() - 1) && (map.md2(Coords.x + 1, Coords.y) == '.' || map.md2(Coords.x + 1, Coords.y) == ':')) {
+			if (Coords.y < (map.columns() - 1) && (map.md2(Coords.x, Coords.y + 1) == '.' || map.md2(Coords.x, Coords.y + 1) == ':')) {
 
+				map.Modify(Coords.x, Coords.y, aux);
 				Coords.y++;
+				if (aux != map.md2(Coords.x, Coords.y))
+				{
+					aux = map.md2(Coords.x, Coords.y);
+				}
+
 				map.Modify(Coords.x, Coords.y, value);
-				if (map.md2(Coords.x, Coords.y - 1) == '.')
-				{
-					map.Modify(Coords.x, Coords.y - 1, '.');
-				}
-				else if (map.md2(Coords.x, Coords.y - 1) == ':')
-				{
-					map.Modify(Coords.x, Coords.y - 1, ':');
-				}
 			}
 			break;
 

@@ -78,7 +78,7 @@ void main()
 	std::vector<Player*>Player2{ player_1, player_2, player_3, player_4, player_5, player_6 };
 	Player1[0]->setActive(true);
 	Player2[0]->setActive(true);
-	mapa.printColoredMap();
+	//mapa.printColoredMap();
 	enti::cout << enti::cend;
 	do {
 		Tecla = enti::getInputKey();
@@ -87,7 +87,7 @@ void main()
 			Player1[0]->movement(Tecla);
 			checkAlive(Player1, Player2);
 			system("cls");
-			mapa.printColoredMap();
+		//	mapa.printColoredMap();
 			enti::cout << enti::cend;
 		}
 	} while (Player1.empty() == false || Player2.empty() == false);
