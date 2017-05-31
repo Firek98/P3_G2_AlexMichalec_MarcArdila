@@ -34,14 +34,15 @@ Player::~Player()
 
 void Player::movement(enti::InputKey tecla)
 {
+	moved = false;
 	char aux = '.';
 		switch (tecla)
 		{
-		case enti::InputKey::NONE:
+		case enti::InputKey::NONE:			
 			break;
 		case enti::InputKey::W:
 			if (Coords.x > 0 && (map.md2(Coords.x - 1, Coords.y) == '.' || map.md2(Coords.x - 1, Coords.y) == ':')) {
-				
+
 				map.Modify(Coords.x, Coords.y, aux);
 				Coords.x--;
 
@@ -51,7 +52,10 @@ void Player::movement(enti::InputKey tecla)
 				}
 
 				map.Modify(Coords.x, Coords.y, value);
+				moved = true;
 			}
+			else
+				moved = false;
 			break;
 		case enti::InputKey::A:
 			if (Coords.y > 0 && (map.md2(Coords.x, Coords.y - 1) == '.' || map.md2(Coords.x, Coords.y - 1) == ':')) {
@@ -65,7 +69,10 @@ void Player::movement(enti::InputKey tecla)
 				}
 
 				map.Modify(Coords.x, Coords.y, value);
+				moved = true;
 			}
+			else
+				moved = false;
 			break;
 		case enti::InputKey::S:
 			if (Coords.x < (map.rows() - 1) && (map.md2(Coords.x + 1, Coords.y) == '.' || map.md2(Coords.x + 1, Coords.y) == ':')) {
@@ -79,7 +86,10 @@ void Player::movement(enti::InputKey tecla)
 				}
 
 				map.Modify(Coords.x, Coords.y, value);
+				moved = true;
 			}
+			else
+				moved = false;
 			break;
 		case enti::InputKey::D:
 			if (Coords.y < (map.columns() - 1) && (map.md2(Coords.x, Coords.y + 1) == '.' || map.md2(Coords.x, Coords.y + 1) == ':')) {
@@ -92,7 +102,10 @@ void Player::movement(enti::InputKey tecla)
 				}
 
 				map.Modify(Coords.x, Coords.y, value);
+				moved = true;
 			}
+			else
+				moved = false;
 			break;
 		case enti::InputKey::SPACEBAR:
 			active = false;
@@ -133,3 +146,15 @@ bool Player::isActive()
 {
 	return active;
 }
+
+char Player::playerValue()
+{
+	return value;
+}
+
+bool Player::playerMoved()
+{
+	return moved;
+}
+
+

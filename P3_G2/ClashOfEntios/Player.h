@@ -14,7 +14,7 @@ class Player
 	int hp;
 	coords Coords;
 	bool active;
-
+	bool moved;
 
 public:
 	Player(Map m, char a);
@@ -26,6 +26,7 @@ public:
 	int playerHp();
 	bool isAlive();
 	bool isActive();
-
+	char playerValue();
+	bool playerMoved();
 
 };
