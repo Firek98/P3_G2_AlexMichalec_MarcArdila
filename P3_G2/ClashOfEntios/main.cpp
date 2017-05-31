@@ -5,6 +5,10 @@
 #include "Renderer.hh"
 #include <vector>
 
+//FUNCIONES///////////////////////////////////////////////////////////////////////
+
+//COMPROBAR SI UN ENTIO ESTA VIVO O MUERTO////////////////////////////////////////
+
 void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 {
 	for (int i = 0; i < a.size(); i++)
@@ -24,35 +28,15 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 	}
 }
 
+//ALGORITMO PARA COMPROBAR QUE JUGADOR JUEGA SEGUN LA FATIGA///////////////////////
+//WIP///
+
 void setActivePlayer(std::vector<Player*> a, int actual)
 {
-	int max = 0;
-	int maxind = 0;
-	for (int i = 0; i < a.size(); i++)
-	{
-		if (a[i]->playerHp() > max)
-		{
-			max = a[i]->playerHp();
-			maxind = i;
-		}
-		
-		else if (a[i]->playerHp() == max)
-		{
-			for (int i = 0; i < a.size(); i++)
-			{
-				if (a[i]->playerHp() == max && i != actual)
-				{
-					maxind = i;
-				}
-				else if (i == actual)
-				{
-					i++;
-				}
-			}
-		}
-	}
-	a[maxind]->setActive(true);
+	
 }
+
+//COMPROBAR QUE ENTIO ESTA ACTIVO//////////////////////////////////////////////////
 
 int checkActive(std::vector<Player*>a)
 {
@@ -67,9 +51,12 @@ int checkActive(std::vector<Player*>a)
 
 void main()
 {
+	//SETUP DE VARIABLES Y CLASES////////////////////////////////////////////////////////////////////
+
 	enti::InputKey Tecla;
 	Map mapa;
 	int activePlayer;
+	int turnos;
 
 	Player *player_a = new Player(mapa, 'A');
 	Player *player_b = new Player(mapa, 'B');
@@ -90,21 +77,86 @@ void main()
 	Player2[0]->setActive(true);
 	mapa.printColoredMap();
 	enti::cout << enti::cend;
-	do {
-		Tecla = enti::getInputKey();
-		if (Tecla != enti::InputKey::NONE)
-		{
-			activePlayer = checkActive(Player1);
-			Player1[activePlayer]->movement(Tecla);
-			if (Tecla == enti::InputKey::SPACEBAR)
+
+	//BUCLE DE JUEGO/////////////////////////////////////////////////////////////////////////////
+
+	while (Player1.empty() == false || Player2.empty() == false)
+	{
+
+		//JUGADOR 1
+
+		turnos = 10;
+		do {
+			Tecla = enti::getInputKey();
+			if (Tecla != enti::InputKey::NONE)
 			{
-				setActivePlayer(Player1, activePlayer);
+				activePlayer = checkActive(Player1);
+				Player1[activePlayer]->movement(Tecla);
+				if (Tecla == enti::InputKey::SPACEBAR)
+				{
+					setActivePlayer(Player1, activePlayer);
+					turnos--;
+				}
+				checkAlive(Player1, Player2);
+				system("cls");
+				mapa.printColoredMap();
+				enti::cout << enti::cend;
+				turnos--;
 			}
-			checkAlive(Player1, Player2);
-			system("cls");
-			mapa.printColoredMap();
-			enti::cout << enti::cend;
-		}
-	} while (Player1.empty() == false || Player2.empty() == false);
-	
+		} while (turnos != 0);
+
+		//CAMBIO DE TURNO//
+		//////////////////////////////////////////////////////////////////////////////////////
+		mapa.printColoredMap();
+		enti::cout << enti::endl;
+		enti::cout << enti::Color::LIGHTMAGENTA << "PRESIONA ENTER PARA CEDER TU TURNO" << enti::endl;
+		enti::cout << enti::cend;
+		do 
+		{
+			Tecla = enti::getInputKey();
+		} while (Tecla != enti::InputKey::ENTER);
+
+		system("cls");
+		mapa.printColoredMap();
+		enti::cout << enti::cend;
+		//////////////////////////////////////////////////////////////////////////////////////
+
+		//JUGADOR 2
+
+		turnos = 10;
+		do {
+			Tecla = enti::getInputKey();
+			if (Tecla != enti::InputKey::NONE)
+			{
+				activePlayer = checkActive(Player1);
+				Player2[activePlayer]->movement(Tecla);
+				if (Tecla == enti::InputKey::SPACEBAR)
+				{
+					setActivePlayer(Player1, activePlayer);
+					turnos--;
+				}
+				checkAlive(Player1, Player2);
+				system("cls");
+				mapa.printColoredMap();
+				enti::cout << enti::cend;
+				turnos--;
+			}
+		} while (turnos != 0);
+		
+		//CAMBIO DE TURNO//
+		//////////////////////////////////////////////////////////////////////////////////////
+		mapa.printColoredMap();
+		enti::cout << enti::endl;
+		enti::cout << enti::Color::LIGHTMAGENTA << "PRESIONA ENTER PARA CEDER TU TURNO" << enti::endl;
+		enti::cout << enti::cend;
+		do
+		{
+			Tecla = enti::getInputKey();
+		} while (Tecla != enti::InputKey::ENTER);
+
+		system("cls");
+		mapa.printColoredMap();
+		enti::cout << enti::cend;
+		//////////////////////////////////////////////////////////////////////////////////////
+	}
 }
