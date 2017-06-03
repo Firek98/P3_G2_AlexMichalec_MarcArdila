@@ -16,6 +16,7 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 		if (a[i]->isAlive() == false)
 		{
 			a.erase(a.begin() + i);
+			
 		}
 	}
 	for (int i = 0; i < b.size(); i++)
@@ -23,6 +24,7 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 		if (b[i]->isAlive() == false)
 		{
 			b.erase(b.begin() + i);
+
 		}
 
 	}
@@ -49,6 +51,17 @@ int checkActive(std::vector<Player*>a)
 	}
 }
 
+void checkTarget(std::vector<Player*> a, char target)
+{
+
+	for (int i = 0; i < a.size(); i++)
+	{
+		if (a[i]->playerValue() == target)
+		{
+			a[i]->damage(10);
+		}
+	}
+}
 
 void main()
 {
@@ -58,6 +71,7 @@ void main()
 	Map mapa;
 	int activePlayer;
 	int turnos;
+	char target = 0;
 
 	Player *player_a = new Player(mapa, 'A');
 	Player *player_b = new Player(mapa, 'B');
@@ -100,7 +114,7 @@ void main()
 					system("cls");
 					activePlayer = checkActive(Player1);
 					Player1[activePlayer]->movement(Tecla);
-					if (Tecla == enti::InputKey::SPACEBAR)
+					if (Tecla == enti::InputKey::ENTER)
 					{
 						setActivePlayer(Player1, activePlayer);
 						turnos--;
@@ -108,6 +122,13 @@ void main()
 					if (Player1[activePlayer]->playerMoved())
 					{
 						turnos--;
+					
+					}
+					if (Tecla == enti::InputKey::SPACEBAR)
+					{
+						target = Player1[activePlayer]->attack();
+						checkTarget(Player2, target);
+						target = 0;
 					}
 					checkAlive(Player1, Player2);
 					mapa.printColoredMap();
@@ -154,7 +175,7 @@ void main()
 					system("cls");
 					activePlayer = checkActive(Player2);
 					Player2[activePlayer]->movement(Tecla);
-					if (Tecla == enti::InputKey::SPACEBAR)
+					if (Tecla == enti::InputKey::ENTER)
 					{
 						setActivePlayer(Player2, activePlayer);
 						turnos--;

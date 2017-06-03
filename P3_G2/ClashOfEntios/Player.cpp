@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "Input.inl.hh"
 #include "Map.h"
+#include "Renderer.hh"
 
 
 
@@ -116,7 +117,7 @@ void Player::movement(enti::InputKey tecla)
 			else
 				moved = false;
 			break;
-		case enti::InputKey::SPACEBAR:
+		case enti::InputKey::ENTER:
 			active = false;			
 		default:
 			break;
@@ -129,10 +130,163 @@ void Player::setActive(bool a)
 	active = a;
 }
 
-void Player::attack()
-{
-	
-}
+char Player::attack()
+ {
+	bool keypressed = false;
+	enti::InputKey dir;
+	enti::cout << enti::Color::YELLOW << "WHAT DIRECTION?" << enti::endl;
+	enti::cout << "1 - UP" << enti::endl;
+	enti::cout << "2 - DOWN" << enti::endl;
+	enti::cout << "3 - LEFT" << enti::endl;
+	enti::cout << "4 - RIGHT" << enti::endl;
+	enti::cout << enti::cend;
+	do {
+		dir = enti::getInputKey();
+		if (dir != enti::InputKey::NONE)
+		{
+			switch (dir)
+			{
+			case enti::InputKey::NUM1:
+				if (map.md2(Coords.x - 1, Coords.y) == 'A')
+					return 'A';
+				else if (map.md2(Coords.x - 1, Coords.y) == 'B')
+					return 'B';
+				else if (map.md2(Coords.x - 1, Coords.y) == 'C')
+					return 'C';
+				else if (map.md2(Coords.x - 1, Coords.y) == 'D')
+					return 'D';
+				else if (map.md2(Coords.x - 1, Coords.y) == 'E')
+					return 'E';
+				else if (map.md2(Coords.x - 1, Coords.y) == 'F')
+					return 'F';
+				else if (map.md2(Coords.x - 1, Coords.y) == '1')
+					return '1';
+				else if (map.md2(Coords.x - 1, Coords.y) == '2')
+					return '2';
+				else if (map.md2(Coords.x - 1, Coords.y) == '3')
+					return '3';
+				else if (map.md2(Coords.x - 1, Coords.y) == '4')
+					return '4';
+				else if (map.md2(Coords.x - 1, Coords.y) == '5')
+					return '5';
+				else if (map.md2(Coords.x - 1, Coords.y) == '6')
+					return '6';
+				else
+				{
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					return '0';
+				}
+				keypressed = true;
+				break;
+			case enti::InputKey::NUM2:
+				if (map.md2(Coords.x + 1, Coords.y) == 'A')
+					return 'A';
+				else if (map.md2(Coords.x + 1, Coords.y) == 'B')
+					return 'B';
+				else if (map.md2(Coords.x + 1, Coords.y) == 'C')
+					return 'C';
+				else if (map.md2(Coords.x + 1, Coords.y) == 'D')
+					return 'D';
+				else if (map.md2(Coords.x + 1, Coords.y) == 'E')
+					return 'E';
+				else if (map.md2(Coords.x + 1, Coords.y) == 'F')
+					return 'F';
+				else if (map.md2(Coords.x + 1, Coords.y) == '1')
+					return '1';
+				else if (map.md2(Coords.x + 1, Coords.y) == '2')
+					return '2';
+				else if (map.md2(Coords.x + 1, Coords.y) == '3')
+					return '3';
+				else if (map.md2(Coords.x + 1, Coords.y) == '4')
+					return '4';
+				else if (map.md2(Coords.x + 1, Coords.y) == '5')
+					return '5';
+				else if (map.md2(Coords.x + 1, Coords.y) == '6')
+					return '6';
+				else
+				{
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					return '0';
+				}
+				keypressed = true;
+				break;
+			case enti::InputKey::NUM3:
+				if (map.md2(Coords.x, Coords.y - 1) == 'A')
+					return 'A';
+				else if (map.md2(Coords.x, Coords.y - 1) == 'B')
+					return 'B';
+				else if (map.md2(Coords.x, Coords.y - 1) == 'C')
+					return 'C';
+				else if (map.md2(Coords.x, Coords.y - 1) == 'D')
+					return 'D';
+				else if (map.md2(Coords.x, Coords.y - 1) == 'E')
+					return 'E';
+				else if (map.md2(Coords.x, Coords.y - 1) == 'F')
+					return 'F';
+				else if (map.md2(Coords.x, Coords.y - 1) == '1')
+					return '1';
+				else if (map.md2(Coords.x, Coords.y - 1) == '2')
+					return '2';
+				else if (map.md2(Coords.x, Coords.y - 1) == '3')
+					return '3';
+				else if (map.md2(Coords.x, Coords.y - 1) == '4')
+					return '4';
+				else if (map.md2(Coords.x, Coords.y - 1) == '5')
+					return '5';
+				else if (map.md2(Coords.x, Coords.y - 1) == '6')
+					return '6';
+				else
+				{
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					return '0';
+				}
+				keypressed = true;
+				break;
+			case enti::InputKey::NUM4:
+				if (map.md2(Coords.x, Coords.y + 1) == 'A')
+					return 'A';
+				else if (map.md2(Coords.x, Coords.y + 1) == 'B')
+					return 'B';
+				else if (map.md2(Coords.x, Coords.y + 1) == 'C')
+					return 'C';
+				else if (map.md2(Coords.x, Coords.y + 1) == 'D')
+					return 'D';
+				else if (map.md2(Coords.x, Coords.y + 1) == 'E')
+					return 'E';
+				else if (map.md2(Coords.x, Coords.y + 1) == 'F')
+					return 'F';
+				else if (map.md2(Coords.x, Coords.y + 1) == '1')
+					return '1';
+				else if (map.md2(Coords.x, Coords.y + 1) == '2')
+					return '2';
+				else if (map.md2(Coords.x, Coords.y + 1) == '3')
+					return '3';
+				else if (map.md2(Coords.x, Coords.y + 1) == '4')
+					return '4';
+				else if (map.md2(Coords.x, Coords.y + 1) == '5')
+					return '5';
+				else if (map.md2(Coords.x, Coords.y + 1) == '6')
+					return '6';
+				else
+				{
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					return '0';
+				}
+			}
+			}
+			
+		}while (keypressed == false);
+	}
+
+	void Player::damage(int a)
+	{
+		hp -= a;
+	}
+
 
 int Player::playerHp()
 {
@@ -175,5 +329,7 @@ bool Player::playerRedo()
 {
 	return redo;
 }
+
+
 
 

@@ -19,12 +19,12 @@ class Player
 	bool redo;
 
 public:
+	int turnos;
 	Player(Map m, char a);
 	~Player();
 	void movement(enti::InputKey tecla);
 	Map &map;
 	void setActive(bool a);
-	void attack();
 	int playerHp();
 	bool isAlive();
 	bool isActive();
@@ -32,5 +32,7 @@ public:
 	bool playerMoved();
 	bool playerUndo();
 	bool playerRedo();
+	char attack();
+	void damage(int a);
 
 };
