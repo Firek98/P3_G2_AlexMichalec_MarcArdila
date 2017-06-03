@@ -9,7 +9,7 @@
 
 //COMPROBAR SI UN ENTIO ESTA VIVO O MUERTO////////////////////////////////////////
 
-void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
+void checkAlive(std::vector<Player*> &a, std::vector<Player*> &b)
 {
 	for (int i = 0; i < a.size(); i++)
 	{
@@ -24,7 +24,7 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 		if (b[i]->isAlive() == false)
 		{
 			b[i]->erase();
-			b.erase(b.begin() + i);	
+			b.erase(b.begin() + i);
 		}
 
 	}
