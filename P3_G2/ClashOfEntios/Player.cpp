@@ -36,8 +36,6 @@ void Player::movement(enti::InputKey tecla)
 {
 	char lastmovement = 0;
 	moved = false;
-	undo = false;
-	redo = false;
 	char aux = '.';
 		switch (tecla)
 		{
@@ -56,6 +54,7 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
+				undo = false;
 				lastmovement = 'W';
 			}
 			else
@@ -74,6 +73,7 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
+				undo = false;
 				lastmovement = 'A';
 			}
 			else
@@ -92,6 +92,7 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
+				undo = false;
 				lastmovement = 'S';
 			}
 			else
@@ -109,65 +110,14 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
+				undo = false;
 				lastmovement = 'D';
 			}
 			else
 				moved = false;
 			break;
 		case enti::InputKey::SPACEBAR:
-			active = false;
-		case enti::InputKey::Z:
-			switch (lastmovement)
-			{
-			case 'W':
-
-				map.Modify(Coords.x, Coords.y, aux);
-				Coords.x++;
-
-				if (aux != map.md2(Coords.x, Coords.y))
-				{
-					aux = map.md2(Coords.x, Coords.y);
-				}
-
-				map.Modify(Coords.x, Coords.y, value);
-				undo = true;
-			case 'A':
-
-				map.Modify(Coords.x, Coords.y, aux);
-				Coords.y++;
-				if (aux != map.md2(Coords.x, Coords.y))
-				{
-					aux = map.md2(Coords.x, Coords.y);
-				}
-
-				map.Modify(Coords.x, Coords.y, value);
-			case 'S':
-
-				map.Modify(Coords.x, Coords.y, aux);
-				Coords.x--;
-
-				if (aux != map.md2(Coords.x, Coords.y))
-				{
-					aux = map.md2(Coords.x, Coords.y);
-				}
-
-				map.Modify(Coords.x, Coords.y, value);
-
-			case 'D':
-
-				map.Modify(Coords.x, Coords.y, aux);
-				Coords.y--;
-
-				if (aux != map.md2(Coords.x, Coords.y))
-				{
-					aux = map.md2(Coords.x, Coords.y);
-				}
-
-				map.Modify(Coords.x, Coords.y, value);
-
-			default:
-				break;
-			}
+			active = false;			
 		default:
 			break;
 		}
