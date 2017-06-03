@@ -109,6 +109,10 @@ void main()
 					{
 						turnos--;
 					}
+					if (Player1[activePlayer]->playerUndo());
+					{
+						turnos++;
+					}
 					checkAlive(Player1, Player2);
 					mapa.printColoredMap();
 					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;

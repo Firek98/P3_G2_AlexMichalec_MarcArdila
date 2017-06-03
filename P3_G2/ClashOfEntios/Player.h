@@ -15,6 +15,8 @@ class Player
 	coords Coords;
 	bool active;
 	bool moved;
+	bool undo;
+	bool redo;
 
 public:
 	Player(Map m, char a);
@@ -28,5 +30,7 @@ public:
 	bool isActive();
 	char playerValue();
 	bool playerMoved();
+	bool playerUndo();
+	bool playerRedo();
 
 };
