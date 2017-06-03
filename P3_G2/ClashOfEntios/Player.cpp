@@ -287,6 +287,12 @@ char Player::attack()
 		hp -= a;
 	}
 
+	void Player::erase()
+	{
+		value = '.';
+		map.Modify(Coords.x, Coords.y, value);
+	}
+
 
 int Player::playerHp()
 {

@@ -34,5 +34,6 @@ public:
 	bool playerRedo();
 	char attack();
 	void damage(int a);
+	void erase();
 
 };

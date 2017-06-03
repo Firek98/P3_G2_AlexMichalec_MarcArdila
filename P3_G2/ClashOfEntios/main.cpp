@@ -15,16 +15,16 @@ void checkAlive(std::vector<Player*> a, std::vector<Player*> b)
 	{
 		if (a[i]->isAlive() == false)
 		{
-			a.erase(a.begin() + i);
-			
+			a[i]->erase();
+			a.erase(a.begin() + i);	
 		}
 	}
 	for (int i = 0; i < b.size(); i++)
 	{
 		if (b[i]->isAlive() == false)
 		{
-			b.erase(b.begin() + i);
-
+			b[i]->erase();
+			b.erase(b.begin() + i);	
 		}
 
 	}
@@ -191,7 +191,7 @@ void main()
 					enti::cout << enti::Color::YELLOW << "MOVIMIENTOS RESTANTES: " << enti::Color::LIGHTCYAN << turnos;
 					enti::cout << enti::cend;
 
-
+					
 				}
 			} while (turnos != 0);
 		}
