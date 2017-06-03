@@ -34,6 +34,7 @@ Player::~Player()
 
 void Player::movement(enti::InputKey tecla)
 {
+	char lastmovement = 0;
 	moved = false;
 	char aux = '.';
 		switch (tecla)
@@ -53,6 +54,7 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
+				lastmovement = 'W';
 			}
 			else
 				moved = false;
@@ -109,6 +111,14 @@ void Player::movement(enti::InputKey tecla)
 			break;
 		case enti::InputKey::SPACEBAR:
 			active = false;
+		case enti::InputKey::Z:
+			switch (lastmovement)
+			{
+			case 'W':
+
+			default:
+				break;
+			}
 		default:
 			break;
 		}
