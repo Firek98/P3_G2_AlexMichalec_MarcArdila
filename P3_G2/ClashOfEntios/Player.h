@@ -10,7 +10,7 @@ struct coords {
 
 class Player
 {
-	int fatiga;
+	
 	char value;
 	int hp;
 	coords Coords;
@@ -22,6 +22,9 @@ class Player
 
 public:
 
+	bool turno;
+	int fatiga;
+	int movimientos;
 	Player(Map m, char a);
 	~Player();
 	void movement(enti::InputKey tecla);
@@ -41,6 +44,7 @@ public:
 	void erase();
 	void bowAttack(char values[]);
 	void consumeArrows();
+	void resetFatiga();
 
 	
 

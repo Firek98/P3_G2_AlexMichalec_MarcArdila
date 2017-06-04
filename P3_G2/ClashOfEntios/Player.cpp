@@ -11,6 +11,8 @@
 
 Player::Player(Map m, char a) : map(m)
 {
+	movimientos = 0;
+	turno = false;
 	fatiga = 0;
 	arrows = 10;
 	value = a;
@@ -715,6 +717,13 @@ void Player::bowAttack(char values[])
 void Player::consumeArrows()
 {
 	arrows--;
+}
+
+void Player::resetFatiga()
+{
+	fatiga -= movimientos;
+	movimientos = 0;
+	turno = false;
 }
 
 
