@@ -311,21 +311,402 @@ char Player::attack()
 		}while (keypressed == false);
 	}
 
-	void Player::damage(int a)
-	{
-		hp -= a;
-	}
+void Player::bowAttack(char values[])
+{
+	int i = 3;
+	bool keypressed = false;
+	enti::InputKey dir;
+	enti::cout << enti::Color::YELLOW << "WHAT DIRECTION?" << enti::endl;
+	enti::cout << "1 - UP" << enti::endl;
+	enti::cout << "2 - DOWN" << enti::endl;
+	enti::cout << "3 - LEFT" << enti::endl;
+	enti::cout << "4 - RIGHT" << enti::endl;
+	enti::cout << enti::cend;
+	do {
+		dir = enti::getInputKey();
+		if (dir != enti::InputKey::NONE)
+		{
+			switch (dir)
+			{
+			case enti::InputKey::NUM1:
+				while(i<=10)
+				{
+					if (map.md2(Coords.x - i, Coords.y) == 'X')
+					{
+						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+						values[0] = '0';
+						values[1] = '0';
+						break;
+					}
+					if (map.md2(Coords.x - i, Coords.y) == 'A')
+					{
+						values[0] = 'A';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == 'B')
+					{
+						values[0] = 'B';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == 'C')
+					{
+						values[0] = 'C';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == 'D')
+					{
+						values[0] = 'D';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == 'E')
+					{
+						values[0] = 'E';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == 'F')
+					{
+						values[0] = 'F';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == '1')
+					{
+						values[0] = '1';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == '2')
+					{
+						values[0] = '2';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == '3')
+					{
+						values[0] = '3';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == '4')
+					{
+						values[0] = '4';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == '5')
+					{
+						values[0] = '5';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x - i, Coords.y) == '6')
+					{
+						values[0] = '6';
+						values[1] = i;
+						break;
+					}
+					i++;
+				}
+				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+				enti::cout << enti::cend;
+				keypressed = true;
+				break;
+			case enti::InputKey::NUM2:
+				while (i <= 10)
+				{
+					if (map.md2(Coords.x + i, Coords.y) == 'X')
+					{
+						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+						values[0] = '0';
+						values[1] = '0';
+						break;
+					}
+					if (map.md2(Coords.x + i, Coords.y) == 'A')
+					{
+						values[0] = 'A';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == 'B')
+					{
+						values[0] = 'B';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == 'C')
+					{
+						values[0] = 'C';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == 'D')
+					{
+						values[0] = 'D';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == 'E')
+					{
+						values[0] = 'E';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == 'F')
+					{
+						values[0] = 'F';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == '1')
+					{
+						values[0] = '1';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == '2')
+					{
+						values[0] = '2';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == '3')
+					{
+						values[0] = '3';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == '4')
+					{
+						values[0] = '4';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == '5')
+					{
+						values[0] = '5';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x + i, Coords.y) == '6')
+					{
+						values[0] = '6';
+						values[1] = i;
+						break;
+					}
+					i++;
+				}
+				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+				enti::cout << enti::cend;
+				keypressed = true;
+				break;
+			case enti::InputKey::NUM3:
+				while (i <= 10)
+				{
+					if (map.md2(Coords.x, Coords.y - i) == 'X')
+					{
+						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+						values[0] = '0';
+						values[1] = '0';
+						break;
+					}
+					if (map.md2(Coords.x, Coords.y - i) == 'A')
+					{
+						values[0] = 'A';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == 'B')
+					{
+						values[0] = 'B';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == 'C')
+					{
+						values[0] = 'C';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == 'D')
+					{
+						values[0] = 'D';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == 'E')
+					{
+						values[0] = 'E';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == 'F')
+					{
+						values[0] = 'F';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == '1')
+					{
+						values[0] = '1';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == '2')
+					{
+						values[0] = '2';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == '3')
+					{
+						values[0] = '3';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == '4')
+					{
+						values[0] = '4';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == '5')
+					{
+						values[0] = '5';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y - i) == '6')
+					{
+						values[0] = '6';
+						values[1] = i;
+						break;
+					}
+					i++;
+				}
+				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+				keypressed = true;
+				break;
+			case enti::InputKey::NUM4:
+				while (i <= 10)
+				{
+					if (map.md2(Coords.x, Coords.y + i) == 'X')
+					{
+						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+						values[0] = '0';
+						values[1] = '0';
+						break;
+					}
+					if (map.md2(Coords.x, Coords.y + i) == 'A')
+					{
+						values[0] = 'A';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == 'B')
+					{
+						values[0] = 'B';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == 'C')
+					{
+						values[0] = 'C';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == 'D')
+					{
+						values[0] = 'D';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == 'E')
+					{
+						values[0] = 'E';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == 'F')
+					{
+						values[0] = 'F';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == '1')
+					{
+						values[0] = '1';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == '2')
+					{
+						values[0] = '2';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == '3')
+					{
+						values[0] = '3';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == '4')
+					{
+						values[0] = '4';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == '5')
+					{
+						values[0] = '5';
+						values[1] = i;
+						break;
+					}
+					else if (map.md2(Coords.x, Coords.y + i) == '6')
+					{
+						values[0] = '6';
+						values[1] = i;
+						break;
+					}
+					i++;
+				}
+				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl
+				keypressed = true;
+				break;
+			}
+		}
+	} while (keypressed == false);
+}
 
-	void Player::erase()
-	{
-		value = '.';
-		map.Modify(Coords.x, Coords.y, value);
-	}
 
-	int Player::playerArrows()
-	{
-		return arrows;
-	}
+
+void Player::damage(int a)
+{
+	hp -= a;
+}
+
+void Player::erase()
+{
+	value = '.';
+	map.Modify(Coords.x, Coords.y, value);
+}
+
+	
+
+int Player::playerArrows()
+{
+	return arrows;
+}
+
+int Player::playerFatiga()
+{
+	return fatiga;
+}
 
 
 int Player::playerHp()

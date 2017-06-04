@@ -63,15 +63,24 @@ void checkTarget(std::vector<Player*> a, char target)
 	}
 }
 
+void attackBow(std::vector<Player*> a, int values[])
+{
+		
+}
+
 void main()
 {
 	//SETUP DE VARIABLES Y CLASES////////////////////////////////////////////////////////////////////
 
 	enti::InputKey Tecla;
+	enti::InputKey Weapon;
 	Map mapa;
 	int activePlayer;
 	int turnos;
 	char target = 0;
+	bool keypressed = false;
+	char values[2] = { 0,0 };
+	
 
 	Player *player_a = new Player(mapa, 'A');
 	Player *player_b = new Player(mapa, 'B');
@@ -100,6 +109,7 @@ void main()
 
 		//JUGADOR 1//////////////////////////////////////////////////////////////////////////////
 		{
+			
 			turnos = 10;
 			activePlayer = checkActive(Player1);
 			mapa.printColoredMap();
@@ -111,6 +121,8 @@ void main()
 				Tecla = enti::getInputKey();
 				if (Tecla != enti::InputKey::NONE)
 				{
+					char values[2] = { 0,0 };
+					keypressed = false;
 					system("cls");
 					activePlayer = checkActive(Player1);
 					Player1[activePlayer]->movement(Tecla);
@@ -126,9 +138,35 @@ void main()
 					}
 					if (Tecla == enti::InputKey::SPACEBAR)
 					{
-						target = Player1[activePlayer]->attack();
-						checkTarget(Player2, target);
-						target = 0;
+						enti::cout << enti::Color::YELLOW << "CHOOSE A WEAPON: " << enti::endl;
+						enti::cout << enti::Color::YELLOW << "1 - SWORD " << enti::endl;
+						enti::cout << enti::Color::YELLOW << "2 - BOW (" << enti::Color::LIGHTCYAN << Player1[activePlayer]->playerArrows() << enti::Color::YELLOW << " ARROWS)" <<  enti::endl;
+						enti::cout << enti::cend;
+						do {
+							Weapon = enti::getInputKey();
+							if (Weapon != enti::InputKey::NONE)
+							{
+								if (Weapon == enti::InputKey::NUM1)
+								{
+									target = Player1[activePlayer]->attack();
+									checkTarget(Player2, target);
+									target = 0;
+									keypressed = true;
+								}
+								if (Weapon == enti::InputKey::NUM2)
+								{
+									Player1[activePlayer]->bowAttack(values);
+									if (values[0] != 0 && values[1] != 0)
+									{
+
+									}
+									keypressed = true;
+								}
+								else
+									keypressed = true;
+							}
+						} while (keypressed == false);
+						
 					}
 					checkAlive(Player1, Player2);
 					mapa.printColoredMap();
