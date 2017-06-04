@@ -11,6 +11,7 @@
 
 Player::Player(Map m, char a) : map(m)
 {
+	arrows = 10;
 	value = a;
 	hp = 10;
 	for (int i = 0; i < map.rows(); i++)
@@ -291,6 +292,11 @@ char Player::attack()
 	{
 		value = '.';
 		map.Modify(Coords.x, Coords.y, value);
+	}
+
+	void Player::playerArrows()
+	{
+		return arrows;
 	}
 
 

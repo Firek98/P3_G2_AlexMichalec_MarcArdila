@@ -17,6 +17,7 @@ class Player
 	bool moved;
 	bool undo;
 	bool redo;
+	int arrows;
 
 public:
 	int turnos;
@@ -32,8 +33,10 @@ public:
 	bool playerMoved();
 	bool playerUndo();
 	bool playerRedo();
+	void playerArrows();
 	char attack();
 	void damage(int a);
 	void erase();
+	
 
 };
