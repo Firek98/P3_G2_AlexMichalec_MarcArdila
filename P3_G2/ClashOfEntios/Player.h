@@ -40,6 +40,7 @@ public:
 	void damage(int a);
 	void erase();
 	void bowAttack(char values[]);
+	void consumeArrows();
 
 	
 

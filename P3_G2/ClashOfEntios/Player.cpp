@@ -11,6 +11,7 @@
 
 Player::Player(Map m, char a) : map(m)
 {
+	fatiga = 0;
 	arrows = 10;
 	value = a;
 	hp = 10;
@@ -163,6 +164,7 @@ char Player::attack()
  {
 	bool keypressed = false;
 	enti::InputKey dir;
+	map.printColoredMap();
 	enti::cout << enti::Color::YELLOW << "WHAT DIRECTION?" << enti::endl;
 	enti::cout << "1 - UP" << enti::endl;
 	enti::cout << "2 - DOWN" << enti::endl;
@@ -202,8 +204,10 @@ char Player::attack()
 					return '6';
 				else
 				{
+					map.printColoredMap();
 					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 					enti::cout << enti::cend;
+					enti::systemPause();
 					return '0';
 				}
 				keypressed = true;
@@ -235,8 +239,10 @@ char Player::attack()
 					return '6';
 				else
 				{
+					map.printColoredMap();
 					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 					enti::cout << enti::cend;
+					enti::systemPause();
 					return '0';
 				}
 				keypressed = true;
@@ -268,8 +274,10 @@ char Player::attack()
 					return '6';
 				else
 				{
+					map.printColoredMap();
 					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 					enti::cout << enti::cend;
+					enti::systemPause();
 					return '0';
 				}
 				keypressed = true;
@@ -301,8 +309,10 @@ char Player::attack()
 					return '6';
 				else
 				{
+					map.printColoredMap();
 					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 					enti::cout << enti::cend;
+					enti::systemPause();
 					return '0';
 				}
 			}
@@ -316,6 +326,7 @@ void Player::bowAttack(char values[])
 	int i = 3;
 	bool keypressed = false;
 	enti::InputKey dir;
+	map.printColoredMap();
 	enti::cout << enti::Color::YELLOW << "WHAT DIRECTION?" << enti::endl;
 	enti::cout << "1 - UP" << enti::endl;
 	enti::cout << "2 - DOWN" << enti::endl;
@@ -333,7 +344,6 @@ void Player::bowAttack(char values[])
 				{
 					if (map.md2(Coords.x - i, Coords.y) == 'X')
 					{
-						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 						values[0] = '0';
 						values[1] = '0';
 						break;
@@ -412,8 +422,13 @@ void Player::bowAttack(char values[])
 					}
 					i++;
 				}
-				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
-				enti::cout << enti::cend;
+				if (values[0] == '0' && values[1] == '0')
+				{
+					map.printColoredMap();
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					enti::systemPause();
+				}
 				keypressed = true;
 				break;
 			case enti::InputKey::NUM2:
@@ -421,7 +436,6 @@ void Player::bowAttack(char values[])
 				{
 					if (map.md2(Coords.x + i, Coords.y) == 'X')
 					{
-						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 						values[0] = '0';
 						values[1] = '0';
 						break;
@@ -500,8 +514,13 @@ void Player::bowAttack(char values[])
 					}
 					i++;
 				}
-				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
-				enti::cout << enti::cend;
+				if (values[0] == '0' && values[1] == '0')
+				{
+					map.printColoredMap();
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					enti::systemPause();
+				}
 				keypressed = true;
 				break;
 			case enti::InputKey::NUM3:
@@ -509,7 +528,6 @@ void Player::bowAttack(char values[])
 				{
 					if (map.md2(Coords.x, Coords.y - i) == 'X')
 					{
-						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 						values[0] = '0';
 						values[1] = '0';
 						break;
@@ -588,7 +606,13 @@ void Player::bowAttack(char values[])
 					}
 					i++;
 				}
-				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+				if (values[0] == '0' && values[1] == '0')
+				{
+					map.printColoredMap();
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					enti::systemPause();
+				}
 				keypressed = true;
 				break;
 			case enti::InputKey::NUM4:
@@ -596,7 +620,6 @@ void Player::bowAttack(char values[])
 				{
 					if (map.md2(Coords.x, Coords.y + i) == 'X')
 					{
-						enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 						values[0] = '0';
 						values[1] = '0';
 						break;
@@ -675,12 +698,23 @@ void Player::bowAttack(char values[])
 					}
 					i++;
 				}
-				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+				if (values[0] == '0' && values[1] == '0')
+				{
+					map.printColoredMap();
+					enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
+					enti::cout << enti::cend;
+					enti::systemPause();
+				}
 				keypressed = true;
 				break;
 			}
 		}
 	} while (keypressed == false);
+}
+
+void Player::consumeArrows()
+{
+	arrows--;
 }
 
 

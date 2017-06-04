@@ -128,7 +128,7 @@ void main()
 				Tecla = enti::getInputKey();
 				if (Tecla != enti::InputKey::NONE)
 				{
-					char values[2] = { 0,0 };
+					char values[2] = { '0','0' };
 					keypressed = false;
 					system("cls");
 					activePlayer = checkActive(Player1);
@@ -145,6 +145,7 @@ void main()
 					}
 					if (Tecla == enti::InputKey::SPACEBAR)
 					{
+						mapa.printColoredMap();
 						enti::cout << enti::Color::YELLOW << "CHOOSE A WEAPON: " << enti::endl;
 						enti::cout << enti::Color::YELLOW << "1 - SWORD " << enti::endl;
 						enti::cout << enti::Color::YELLOW << "2 - BOW (" << enti::Color::LIGHTCYAN << Player1[activePlayer]->playerArrows() << enti::Color::YELLOW << " ARROWS)" <<  enti::endl;
@@ -159,14 +160,28 @@ void main()
 									checkTarget(Player2, target);
 									target = 0;
 									keypressed = true;
+									turnos--;
 								}
 								if (Weapon == enti::InputKey::NUM2)
 								{
-									Player1[activePlayer]->bowAttack(values);
-									if (values[0] != 0 && values[1] != 0)
+									if (Player1[activePlayer]->playerArrows() > 0)
 									{
-										attackBow(Player2, values);
+										Player1[activePlayer]->bowAttack(values);
+										if (values[0] != 0 && values[1] != 0)
+										{
+											attackBow(Player2, values);
+											Player1[activePlayer]->consumeArrows();
+											turnos--;
+										}
 									}
+									else
+									{
+										mapa.printColoredMap();
+										enti::cout << enti::Color::LIGHTRED << "NO ARROWS LEFT!" << enti::endl;
+										enti::cout << enti::cend;
+										enti::systemPause();
+									}
+
 									keypressed = true;
 								}
 								else
