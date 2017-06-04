@@ -33,7 +33,7 @@ public:
 	bool playerMoved();
 	bool playerUndo();
 	bool playerRedo();
-	void playerArrows();
+	int playerArrows();
 	char attack();
 	void damage(int a);
 	void erase();

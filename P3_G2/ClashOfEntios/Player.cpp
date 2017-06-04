@@ -46,7 +46,14 @@ void Player::movement(enti::InputKey tecla)
 		case enti::InputKey::W:
 			if (Coords.x > 0 && (map.md2(Coords.x - 1, Coords.y) == '.' || map.md2(Coords.x - 1, Coords.y) == ':')) {
 
-				map.Modify(Coords.x, Coords.y, aux);
+				if (map.md2(Coords.x - 1, Coords.y) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x - 1, Coords.y) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
 				Coords.x--;
 
 				if (aux != map.md2(Coords.x, Coords.y))
@@ -65,7 +72,14 @@ void Player::movement(enti::InputKey tecla)
 		case enti::InputKey::A:
 			if (Coords.y > 0 && (map.md2(Coords.x, Coords.y - 1) == '.' || map.md2(Coords.x, Coords.y - 1) == ':')) {
 
-				map.Modify(Coords.x, Coords.y, aux);
+				if (map.md2(Coords.x, Coords.y - 1) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x, Coords.y - 1) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
 				Coords.y--;
 
 				if (aux != map.md2(Coords.x, Coords.y))
@@ -84,7 +98,14 @@ void Player::movement(enti::InputKey tecla)
 		case enti::InputKey::S:
 			if (Coords.x < (map.rows() - 1) && (map.md2(Coords.x + 1, Coords.y) == '.' || map.md2(Coords.x + 1, Coords.y) == ':')) {
 
-				map.Modify(Coords.x, Coords.y, aux);
+				if (map.md2(Coords.x + 1, Coords.y) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x + 1, Coords.y) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
 				Coords.x++;
 
 				if (aux != map.md2(Coords.x, Coords.y))
@@ -103,7 +124,14 @@ void Player::movement(enti::InputKey tecla)
 		case enti::InputKey::D:
 			if (Coords.y < (map.columns() - 1) && (map.md2(Coords.x, Coords.y + 1) == '.' || map.md2(Coords.x, Coords.y + 1) == ':')) {
 
-				map.Modify(Coords.x, Coords.y, aux);
+				if (map.md2(Coords.x, Coords.y + 1) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x, Coords.y + 1) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
 				Coords.y++;
 				if (aux != map.md2(Coords.x, Coords.y))
 				{
@@ -294,7 +322,7 @@ char Player::attack()
 		map.Modify(Coords.x, Coords.y, value);
 	}
 
-	void Player::playerArrows()
+	int Player::playerArrows()
 	{
 		return arrows;
 	}
