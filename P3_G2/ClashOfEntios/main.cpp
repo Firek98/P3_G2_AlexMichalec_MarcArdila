@@ -63,9 +63,16 @@ void checkTarget(std::vector<Player*> a, char target)
 	}
 }
 
-void attackBow(std::vector<Player*> a, int values[])
+void attackBow(std::vector<Player*> a, char values[])
 {
-		
+	int dmg = int(values[1]);
+	char value = values[0];
+	dmg = 11 - dmg;
+	for (int i = 0; i < a.size(); i++)
+	{
+		if (a[i]->playerValue() == value)
+			a[i]->damage(dmg);
+	}
 }
 
 void main()
@@ -158,7 +165,7 @@ void main()
 									Player1[activePlayer]->bowAttack(values);
 									if (values[0] != 0 && values[1] != 0)
 									{
-
+										attackBow(Player2, values);
 									}
 									keypressed = true;
 								}

@@ -675,7 +675,7 @@ void Player::bowAttack(char values[])
 					}
 					i++;
 				}
-				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl
+				enti::cout << enti::Color::YELLOW << "YOU FAILED" << enti::endl;
 				keypressed = true;
 				break;
 			}
