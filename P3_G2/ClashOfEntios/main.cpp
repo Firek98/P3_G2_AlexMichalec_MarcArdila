@@ -7,6 +7,35 @@
 
 //FUNCIONES///////////////////////////////////////////////////////////////////////
 
+//PRINT INICIAL///////////////////////////////////////////////////////////////////
+
+void initialPrint()
+{
+	enti::InputKey Key;
+	
+	
+		enti::cout << enti::Color::YELLOW << "-CLASH OF ENTIOS-" << enti::endl;
+		enti::cout << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Each player has 6 entios." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Use WASD to move each entio." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Use Z to undo a movement." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Each entio has 2 weapons: A sword and a bow." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Press SPACEBAR to use a weapon." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- The sword can kill instantly an enemy if it is placed in a cell next door." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- The bow can damage an enemy within a maximum distance of 10 cells, increasing or decresing depending of distance." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Each character has 10 arrows." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Each turn the less fatigued entio will play first." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- To play with the next entio press ENTER." << enti::endl;
+		enti::cout << enti::Color::WHITE << "- Each player can do 10 of these action per turn." << enti::endl;
+		enti::cout << enti::endl;
+		enti::cout << enti::Color::LIGHTMAGENTA << "Press any key to begin the game!" << enti::endl;
+		enti::cout << enti::cend;
+		do
+		{
+			Key = enti::getInputKey();
+	}while (Key == enti::InputKey::NONE);
+}
+
 //COMPROBAR SI UN ENTIO ESTA VIVO O MUERTO////////////////////////////////////////
 
 void checkAlive(std::vector<Player*> &a, std::vector<Player*> &b)
@@ -111,9 +140,12 @@ void attackBow(std::vector<Player*> a, char values[])
 
 void main()
 {
+	
+
+
 	//SETUP DE VARIABLES Y CLASES////////////////////////////////////////////////////////////////////
 
-
+	initialPrint();
 	enti::InputKey Tecla;
 	enti::InputKey Weapon;
 	Map mapa;

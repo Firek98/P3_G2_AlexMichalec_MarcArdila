@@ -10,7 +10,7 @@ struct coords {
 
 class Player
 {
-	
+	bool firstmove;
 	bool undone;
 	char value;
 	int hp;
