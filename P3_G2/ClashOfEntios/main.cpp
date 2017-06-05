@@ -367,7 +367,7 @@ void main()
 					//Player2[activePlayer2]->setActive(true);
 					//if (Player2[activePlayer2]->undoneMovement())
 						//turnos++;
-					//activePlayer2 = checkActive(Player2);
+					activePlayer2 = checkActive(Player2);
 					mapa.printColoredMap();
 					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 2" << enti::endl;
 					enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player2[activePlayer2]->playerValue() << enti::endl;
