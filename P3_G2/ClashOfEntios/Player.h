@@ -14,7 +14,6 @@ class Player
 	bool undone;
 	char value;
 	int hp;
-	coords Coords;
 	bool active;
 	bool moved;
 	char lastmovement;
@@ -30,14 +29,13 @@ public:
 	~Player();
 	void movement(enti::InputKey tecla);
 	Map &map;
+	coords Coords;
 	void setActive(bool a);
 	int playerHp();
 	bool isAlive();
 	bool isActive();
 	char playerValue();
 	bool playerMoved();
-	bool playerUndo();
-	bool playerRedo();
 	int playerArrows();
 	int playerFatiga();
 	char attack();
@@ -47,6 +45,7 @@ public:
 	void consumeArrows();
 	void resetFatiga();
 	char lastMovement();
+	void resetMovement();
 
 	
 

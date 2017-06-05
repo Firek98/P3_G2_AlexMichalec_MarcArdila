@@ -183,6 +183,68 @@ void main()
 						Player1[activePlayer1]->movimientos++;
 						Player1[activePlayer1]->fatiga++;
 					}
+					if (Tecla == enti::InputKey::z)
+					{
+						switch (Player1[activePlayer1]->lastMovement())
+						{
+						case 'W':
+							if (mapa.md2(Player1[activePlayer1]->Coords.x + 1, Player1[activePlayer1]->Coords.y) == '.')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player1[activePlayer1]->Coords.x + 1, Player1[activePlayer1]->Coords.y) == ':')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, ':');
+							}
+							Player1[activePlayer1]->Coords.x++;
+							Player1[activePlayer1]->resetMovement();
+							mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, Player1[activePlayer1]->playerValue());
+							turnos++;
+							break;
+						case 'A':
+							if (mapa.md2(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y + 1) == '.')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y + 1) == ':')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, ':');
+							}
+							Player1[activePlayer1]->Coords.y++;
+							Player1[activePlayer1]->resetMovement();
+							mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, Player1[activePlayer1]->playerValue());
+							turnos++;
+							break;
+						case 'S':
+							if (mapa.md2(Player1[activePlayer1]->Coords.x - 1, Player1[activePlayer1]->Coords.y) == '.')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player1[activePlayer1]->Coords.x - 1, Player1[activePlayer1]->Coords.y) == ':')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, ':');
+							}
+							Player1[activePlayer1]->Coords.x--;
+							Player1[activePlayer1]->resetMovement();
+							mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, Player1[activePlayer1]->playerValue());
+							turnos++;
+							break;
+						case 'D':
+							if (mapa.md2(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y - 1) == '.')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y - 1) == ':')
+							{
+								mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, ':');
+							}
+							Player1[activePlayer1]->Coords.y--;
+							Player1[activePlayer1]->resetMovement();
+							mapa.Modify(Player1[activePlayer1]->Coords.x, Player1[activePlayer1]->Coords.y, Player1[activePlayer1]->playerValue());
+							turnos++;
+							break;
+						}
+					}
 					if (Tecla == enti::InputKey::SPACEBAR)
 					{
 						mapa.printColoredMap();
@@ -235,9 +297,6 @@ void main()
 						
 					}
 					checkAlive(Player1, Player2);
-					//Player1[activePlayer1]->setActive(true);
-					/*if (Player1[activePlayer1]->undoneMovement() == true)
-						turnos++;*/
 					activePlayer1 = checkActive(Player1);
 					mapa.printColoredMap();
 					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;
@@ -283,7 +342,7 @@ void main()
 			turnos = 10;
 			activePlayer2 = checkActive(Player2);
 			mapa.printColoredMap();
-			enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;
+			enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 2" << enti::endl;
 			enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player2[activePlayer2]->playerValue() << enti::endl;
 			enti::cout << enti::Color::YELLOW << "MOVIMIENTOS RESTANTES: " << enti::Color::LIGHTCYAN << turnos;
 			enti::cout << enti::cend;
@@ -310,6 +369,68 @@ void main()
 						turnos--;
 						Player2[activePlayer2]->movimientos++;
 						Player2[activePlayer2]->fatiga++;
+					}
+					if (Tecla == enti::InputKey::z)
+					{
+						switch (Player2[activePlayer2]->lastMovement())
+						{
+						case 'W':
+							if (mapa.md2(Player2[activePlayer2]->Coords.x + 1, Player2[activePlayer2]->Coords.y) == '.')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player2[activePlayer2]->Coords.x + 1, Player2[activePlayer2]->Coords.y) == ':')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, ':');
+							}
+							Player2[activePlayer2]->Coords.x++;
+							Player2[activePlayer2]->resetMovement();
+							mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, Player2[activePlayer2]->playerValue());
+							turnos++;
+							break;
+						case 'A':
+							if (mapa.md2(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y + 1) == '.')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y + 1) == ':')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, ':');
+							}
+							Player2[activePlayer2]->Coords.y++;
+							Player2[activePlayer2]->resetMovement();
+							mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, Player2[activePlayer2]->playerValue());
+							turnos++;
+							break;
+						case 'S':
+							if (mapa.md2(Player2[activePlayer2]->Coords.x - 1, Player2[activePlayer2]->Coords.y) == '.')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player2[activePlayer2]->Coords.x - 1, Player2[activePlayer2]->Coords.y) == ':')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, ':');
+							}
+							Player2[activePlayer2]->Coords.x--;
+							Player2[activePlayer2]->resetMovement();
+							mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, Player2[activePlayer2]->playerValue());
+							turnos++;
+							break;
+						case 'D':
+							if (mapa.md2(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y - 1) == '.')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, '.');
+							}
+							else if (mapa.md2(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y - 1) == ':')
+							{
+								mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, ':');
+							}
+							Player2[activePlayer2]->Coords.y--;
+							Player2[activePlayer2]->resetMovement();
+							mapa.Modify(Player2[activePlayer2]->Coords.x, Player2[activePlayer2]->Coords.y, Player2[activePlayer2]->playerValue());
+							turnos++;
+							break;
+						}
 					}
 					if (Tecla == enti::InputKey::SPACEBAR)
 					{
@@ -364,9 +485,6 @@ void main()
 					}
 					
 					checkAlive(Player1, Player2);
-					//Player2[activePlayer2]->setActive(true);
-					//if (Player2[activePlayer2]->undoneMovement())
-						//turnos++;
 					activePlayer2 = checkActive(Player2);
 					mapa.printColoredMap();
 					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 2" << enti::endl;
