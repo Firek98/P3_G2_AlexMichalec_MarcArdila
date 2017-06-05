@@ -10,27 +10,44 @@ struct coords {
 
 class Player
 {
+	bool firstmove;
+	bool undone;
 	char value;
 	int hp;
-	coords Coords;
 	bool active;
 	bool moved;
-	bool undo;
-	bool redo;
+	char lastmovement;
+	int arrows;
+	int fatiga;
+	int movimientos;
 
 public:
+
+	bool turno;
 	Player(Map m, char a);
 	~Player();
 	void movement(enti::InputKey tecla);
 	Map &map;
+	coords Coords;
 	void setActive(bool a);
-	void attack();
 	int playerHp();
 	bool isAlive();
 	bool isActive();
 	char playerValue();
 	bool playerMoved();
-	bool playerUndo();
-	bool playerRedo();
+	int playerArrows();
+	int playerFatiga();
+	char attack();
+	void damage(int a);
+	void erase();
+	void bowAttack(char values[]);
+	void consumeArrows();
+	void resetFatiga();
+	char lastMovement();
+	void resetMovement();
+	void increaseMovements();
+	void increaseFatiga();
+	int playerMovements();
+	
 
 };
