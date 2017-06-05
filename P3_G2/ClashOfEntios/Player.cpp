@@ -9,8 +9,14 @@
 
 
 
+bool Player::undoneMovement()
+{
+	return undone;
+}
+
 Player::Player(Map m, char a) : map(m)
 {
+	lastmovement = '0';
 	movimientos = 0;
 	turno = false;
 	fatiga = 0;
@@ -39,7 +45,7 @@ Player::~Player()
 
 void Player::movement(enti::InputKey tecla)
 {
-	char lastmovement = 0;
+	undone = false;
 	moved = false;
 	char aux = '.';
 		switch (tecla)
@@ -66,7 +72,6 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
-				undo = false;
 				lastmovement = 'W';
 			}
 			else
@@ -92,7 +97,6 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
-				undo = false;
 				lastmovement = 'A';
 			}
 			else
@@ -118,7 +122,6 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
-				undo = false;
 				lastmovement = 'S';
 			}
 			else
@@ -143,12 +146,92 @@ void Player::movement(enti::InputKey tecla)
 
 				map.Modify(Coords.x, Coords.y, value);
 				moved = true;
-				undo = false;
 				lastmovement = 'D';
 			}
 			else
 				moved = false;
 			break;
+		/*case enti::InputKey::z:
+			switch (lastmovement)
+			{
+			case 'W':
+				if (map.md2(Coords.x + 1, Coords.y) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x + 1, Coords.y) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
+				Coords.x++;
+
+				if (aux != map.md2(Coords.x, Coords.y))
+				{
+					aux = map.md2(Coords.x, Coords.y);
+				}
+				lastmovement = '0';
+				undone = true;
+				map.Modify(Coords.x, Coords.y, value);
+				break;
+			case 'A':
+					if (map.md2(Coords.x, Coords.y + 1) == '.')
+					{
+						map.Modify(Coords.x, Coords.y, aux);
+					}
+					else if (map.md2(Coords.x, Coords.y + 1) == ':')
+					{
+						map.Modify(Coords.x, Coords.y, ':');
+					}
+					Coords.y++;
+					if (aux != map.md2(Coords.x, Coords.y))
+					{
+						aux = map.md2(Coords.x, Coords.y);
+					}
+					lastmovement = '0';
+					undone = true;
+					map.Modify(Coords.x, Coords.y, value);
+					break;
+			case 'S':
+				if (map.md2(Coords.x - 1, Coords.y) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x - 1, Coords.y) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
+				Coords.x--;
+
+				if (aux != map.md2(Coords.x, Coords.y))
+				{
+					aux = map.md2(Coords.x, Coords.y);
+				}
+				lastmovement = '0';
+				undone = true;
+				map.Modify(Coords.x, Coords.y, value);
+				break;
+			case 'D':
+				if (map.md2(Coords.x, Coords.y - 1) == '.')
+				{
+					map.Modify(Coords.x, Coords.y, aux);
+				}
+				else if (map.md2(Coords.x, Coords.y - 1) == ':')
+				{
+					map.Modify(Coords.x, Coords.y, ':');
+				}
+				Coords.y--;
+
+				if (aux != map.md2(Coords.x, Coords.y))
+				{
+					aux = map.md2(Coords.x, Coords.y);
+				}
+				lastmovement = '0';
+				undone = true;
+				map.Modify(Coords.x, Coords.y, value);
+				break;
+				
+			}
+			*/
 		case enti::InputKey::ENTER:
 			active = false;			
 		default:
@@ -726,6 +809,11 @@ void Player::resetFatiga()
 	turno = false;
 }
 
+char Player::lastMovement()
+{
+	return lastmovement;
+}
+
 
 
 void Player::damage(int a)
@@ -784,15 +872,7 @@ bool Player::playerMoved()
 	return moved;
 }
 
-bool Player::playerUndo()
-{
-	return undo;
-}
 
-bool Player::playerRedo()
-{
-	return redo;
-}
 
 
 

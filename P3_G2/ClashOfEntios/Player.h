@@ -11,17 +11,18 @@ struct coords {
 class Player
 {
 	
+	bool undone;
 	char value;
 	int hp;
 	coords Coords;
 	bool active;
 	bool moved;
-	bool undo;
-	bool redo;
+	char lastmovement;
 	int arrows;
 
 public:
 
+	bool undoneMovement();
 	bool turno;
 	int fatiga;
 	int movimientos;
@@ -45,6 +46,7 @@ public:
 	void bowAttack(char values[]);
 	void consumeArrows();
 	void resetFatiga();
+	char lastMovement();
 
 	
 

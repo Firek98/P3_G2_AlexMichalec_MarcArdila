@@ -33,8 +33,10 @@ void checkAlive(std::vector<Player*> &a, std::vector<Player*> &b)
 //ALGORITMO PARA COMPROBAR QUE JUGADOR JUEGA SEGUN LA FATIGA///////////////////////
 //WIP///
 
-void setActivePlayer(std::vector<Player*> &a, int actual, int &turnos)
+void setActivePlayer(std::vector<Player*> a, int actual, int &turnos)
 {
+	if (actual >= a.size())
+	actual = 0;
 	if (a.size()==1)
 	{
 		a[0]->setActive(true);
@@ -108,10 +110,12 @@ void main()
 {
 	//SETUP DE VARIABLES Y CLASES////////////////////////////////////////////////////////////////////
 
+
 	enti::InputKey Tecla;
 	enti::InputKey Weapon;
 	Map mapa;
-	int activePlayer;
+	int activePlayer1;
+	int activePlayer2;
 	int turnos;
 	char target = 0;
 	bool keypressed = false;
@@ -135,23 +139,24 @@ void main()
 	std::vector<Player*>Player2{ player_1, player_2, player_3, player_4, player_5, player_6 };
 	Player1[0]->setActive(true);
 	Player2[0]->setActive(true);
-	activePlayer = 0;
+	activePlayer1 = 0;
+	activePlayer2 = 0;
 	mapa.printColoredMap();
 	enti::cout << enti::cend;
 
 	//BUCLE DE JUEGO/////////////////////////////////////////////////////////////////////////////
 
-	while (Player1.empty() == false || Player2.empty() == false)
+	while (Player1.empty() != true && Player2.empty() != true)
 	{
 
 		//JUGADOR 1//////////////////////////////////////////////////////////////////////////////
 		{
-			setActivePlayer(Player1, activePlayer, turnos);
+			setActivePlayer(Player1, activePlayer1, turnos);
 			turnos = 10;
-			activePlayer = checkActive(Player1);
+			activePlayer1 = checkActive(Player1);
 			mapa.printColoredMap();
 			enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;
-			enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player1[activePlayer]->playerValue() << enti::endl;
+			enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player1[activePlayer1]->playerValue() << enti::endl;
 			enti::cout << enti::Color::YELLOW << "MOVIMIENTOS RESTANTES: " << enti::Color::LIGHTCYAN << turnos;
 			enti::cout << enti::cend;
 			do {
@@ -161,29 +166,29 @@ void main()
 					char values[2] = { '0','0' };
 					keypressed = false;
 					system("cls");
-					if (Player1[activePlayer]->movimientos != 0 && Player1[activePlayer]->turno==false)
+					if (Player1[activePlayer1]->movimientos != 0 && Player1[activePlayer1]->turno==false)
 					{
-						Player1[activePlayer]->fatiga++;
-						Player1[activePlayer]->turno = true;
+						Player1[activePlayer1]->fatiga++;
+						Player1[activePlayer1]->turno = true;
 					}
-					activePlayer = checkActive(Player1);
-					Player1[activePlayer]->movement(Tecla);
+					activePlayer1 = checkActive(Player1);
+					Player1[activePlayer1]->movement(Tecla);
 					if (Tecla == enti::InputKey::ENTER)
 					{
-						setActivePlayer(Player1, activePlayer, turnos);
+						setActivePlayer(Player1, activePlayer1, turnos);
 					}
-					if (Player1[activePlayer]->playerMoved())
+					if (Player1[activePlayer1]->playerMoved())
 					{
 						turnos--;
-						Player1[activePlayer]->movimientos++;
-						Player1[activePlayer]->fatiga++;
+						Player1[activePlayer1]->movimientos++;
+						Player1[activePlayer1]->fatiga++;
 					}
 					if (Tecla == enti::InputKey::SPACEBAR)
 					{
 						mapa.printColoredMap();
 						enti::cout << enti::Color::YELLOW << "CHOOSE A WEAPON: " << enti::endl;
 						enti::cout << enti::Color::YELLOW << "1 - SWORD " << enti::endl;
-						enti::cout << enti::Color::YELLOW << "2 - BOW (" << enti::Color::LIGHTCYAN << Player1[activePlayer]->playerArrows() << enti::Color::YELLOW << " ARROWS)" <<  enti::endl;
+						enti::cout << enti::Color::YELLOW << "2 - BOW (" << enti::Color::LIGHTCYAN << Player1[activePlayer1]->playerArrows() << enti::Color::YELLOW << " ARROWS)" <<  enti::endl;
 						enti::cout << enti::cend;
 						do {
 							Weapon = enti::getInputKey();
@@ -191,26 +196,26 @@ void main()
 							{
 								if (Weapon == enti::InputKey::NUM1)
 								{
-									target = Player1[activePlayer]->attack();
+									target = Player1[activePlayer1]->attack();
 									checkTarget(Player2, target);
 									target = 0;
 									keypressed = true;
 									turnos--;
-									Player1[activePlayer]->movimientos++;
-									Player1[activePlayer]->fatiga++;
+									Player1[activePlayer1]->movimientos++;
+									Player1[activePlayer1]->fatiga++;
 								}
 								if (Weapon == enti::InputKey::NUM2)
 								{
-									if (Player1[activePlayer]->playerArrows() > 0)
+									if (Player1[activePlayer1]->playerArrows() > 0)
 									{
-										Player1[activePlayer]->bowAttack(values);
+										Player1[activePlayer1]->bowAttack(values);
 										if (values[0] != 0 && values[1] != 0)
 										{
 											attackBow(Player2, values);
-											Player1[activePlayer]->consumeArrows();
+											Player1[activePlayer1]->consumeArrows();
 											turnos--;
-											Player1[activePlayer]->movimientos++;
-											Player1[activePlayer]->fatiga++;
+											Player1[activePlayer1]->movimientos++;
+											Player1[activePlayer1]->fatiga++;
 										}
 									}
 									else
@@ -230,10 +235,13 @@ void main()
 						
 					}
 					checkAlive(Player1, Player2);
-					activePlayer = checkActive(Player1);
+					//Player1[activePlayer1]->setActive(true);
+					/*if (Player1[activePlayer1]->undoneMovement() == true)
+						turnos++;*/
+					activePlayer1 = checkActive(Player1);
 					mapa.printColoredMap();
 					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;
-					enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player1[activePlayer]->playerValue() << enti::endl;
+					enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player1[activePlayer1]->playerValue() << enti::endl;
 					enti::cout << enti::Color::YELLOW << "MOVIMIENTOS RESTANTES: " << enti::Color::LIGHTCYAN << turnos;
 					enti::cout << enti::cend;
 
@@ -243,8 +251,8 @@ void main()
 		//CAMBIO DE TURNO//
 		//////////////////////////////////////////////////////////////////////////////////////
 		{
-			setActivePlayer(Player1, activePlayer, turnos);
-			activePlayer = checkActive(Player1);
+			setActivePlayer(Player1, activePlayer1, turnos);
+			activePlayer1 = checkActive(Player1);
 			mapa.printColoredMap();
 			enti::cout << enti::endl;
 			enti::cout << enti::Color::LIGHTMAGENTA << "PRESIONA ENTER PARA CEDER TU TURNO" << enti::endl;
@@ -258,18 +266,25 @@ void main()
 			system("cls");
 			mapa.printColoredMap();
 			enti::cout << enti::cend;
+			if (Player2.empty())
+			{
+				system("cls");
+				enti::cout << enti::Color::LIGHTMAGENTA << "HA GANADO EL JUGADOR 1!" << enti::endl;
+				enti::cout << enti::cend;
+				enti::systemPause();
+				exit(EXIT_SUCCESS);
+			}
 		}
 		//////////////////////////////////////////////////////////////////////////////////////
 
 		//JUGADOR 2///////////////////////////////////////////////////////////////////////////
 		{
-			setActivePlayer(Player2, activePlayer, turnos);
-			activePlayer = checkActive(Player2);
+			setActivePlayer(Player2, activePlayer2, turnos);
 			turnos = 10;
-			activePlayer = checkActive(Player2);
+			activePlayer2 = checkActive(Player2);
 			mapa.printColoredMap();
 			enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;
-			enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player2[activePlayer]->playerValue() << enti::endl;
+			enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player2[activePlayer2]->playerValue() << enti::endl;
 			enti::cout << enti::Color::YELLOW << "MOVIMIENTOS RESTANTES: " << enti::Color::LIGHTCYAN << turnos;
 			enti::cout << enti::cend;
 			do {
@@ -279,29 +294,29 @@ void main()
 					char values[2] = { '0','0' };
 					keypressed = false;
 					system("cls");
-					if (Player2[activePlayer]->movimientos != 0 && Player2[activePlayer]->turno == false)
+					if (Player2[activePlayer2]->movimientos != 0 && Player2[activePlayer2]->turno == false)
 					{
-						Player2[activePlayer]->fatiga++;
-						Player2[activePlayer]->turno = true;
+						Player2[activePlayer2]->fatiga++;
+						Player2[activePlayer2]->turno = true;
 					}
-					activePlayer = checkActive(Player2);
-					Player2[activePlayer]->movement(Tecla);
+					activePlayer2 = checkActive(Player2);
+					Player2[activePlayer2]->movement(Tecla);
 					if (Tecla == enti::InputKey::ENTER)
 					{
-						setActivePlayer(Player2, activePlayer, turnos);
+						setActivePlayer(Player2, activePlayer2, turnos);
 					}
-					if (Player2[activePlayer]->playerMoved())
+					if (Player2[activePlayer2]->playerMoved())
 					{
 						turnos--;
-						Player2[activePlayer]->movimientos++;
-						Player2[activePlayer]->fatiga++;
+						Player2[activePlayer2]->movimientos++;
+						Player2[activePlayer2]->fatiga++;
 					}
 					if (Tecla == enti::InputKey::SPACEBAR)
 					{
 						mapa.printColoredMap();
 						enti::cout << enti::Color::YELLOW << "CHOOSE A WEAPON: " << enti::endl;
 						enti::cout << enti::Color::YELLOW << "1 - SWORD " << enti::endl;
-						enti::cout << enti::Color::YELLOW << "2 - BOW (" << enti::Color::LIGHTCYAN << Player2[activePlayer]->playerArrows() << enti::Color::YELLOW << " ARROWS)" << enti::endl;
+						enti::cout << enti::Color::YELLOW << "2 - BOW (" << enti::Color::LIGHTCYAN << Player2[activePlayer2]->playerArrows() << enti::Color::YELLOW << " ARROWS)" << enti::endl;
 						enti::cout << enti::cend;
 						do {
 							Weapon = enti::getInputKey();
@@ -309,26 +324,26 @@ void main()
 							{
 								if (Weapon == enti::InputKey::NUM1)
 								{
-									target = Player2[activePlayer]->attack();
+									target = Player2[activePlayer2]->attack();
 									checkTarget(Player1, target);
 									target = 0;
 									keypressed = true;
 									turnos--;
-									Player2[activePlayer]->movimientos++;
-									Player2[activePlayer]->fatiga++;
+									Player2[activePlayer2]->movimientos++;
+									Player2[activePlayer2]->fatiga++;
 								}
 								if (Weapon == enti::InputKey::NUM2)
 								{
-									if (Player2[activePlayer]->playerArrows() > 0)
+									if (Player2[activePlayer2]->playerArrows() > 0)
 									{
-										Player2[activePlayer]->bowAttack(values);
+										Player2[activePlayer2]->bowAttack(values);
 										if (values[0] != 0 && values[1] != 0)
 										{
 											attackBow(Player1, values);
-											Player2[activePlayer]->consumeArrows();
+											Player2[activePlayer2]->consumeArrows();
 											turnos--;
-											Player2[activePlayer]->movimientos++;
-											Player2[activePlayer]->fatiga++;
+											Player2[activePlayer2]->movimientos++;
+											Player2[activePlayer2]->fatiga++;
 										}
 									}
 									else
@@ -347,11 +362,15 @@ void main()
 						} while (keypressed == false);
 
 					}
+					
 					checkAlive(Player1, Player2);
-					activePlayer = checkActive(Player2);
+					//Player2[activePlayer2]->setActive(true);
+					//if (Player2[activePlayer2]->undoneMovement())
+						//turnos++;
+					//activePlayer2 = checkActive(Player2);
 					mapa.printColoredMap();
-					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 1" << enti::endl;
-					enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player2[activePlayer]->playerValue() << enti::endl;
+					enti::cout << enti::Color::LIGHTMAGENTA << "TURNO DEL JUGADOR 2" << enti::endl;
+					enti::cout << enti::Color::YELLOW << "JUGADOR ACTIVO: " << enti::Color::LIGHTCYAN << Player2[activePlayer2]->playerValue() << enti::endl;
 					enti::cout << enti::Color::YELLOW << "MOVIMIENTOS RESTANTES: " << enti::Color::LIGHTCYAN << turnos;
 					enti::cout << enti::cend;
 
@@ -361,7 +380,8 @@ void main()
 		//CAMBIO DE TURNO//
 		//////////////////////////////////////////////////////////////////////////////////////
 		{
-			setActivePlayer(Player2, activePlayer, turnos);
+			setActivePlayer(Player2, activePlayer2, turnos);
+			activePlayer2 = checkActive(Player1);
 			mapa.printColoredMap();
 			enti::cout << enti::endl;
 			enti::cout << enti::Color::LIGHTMAGENTA << "PRESIONA ENTER PARA CEDER TU TURNO" << enti::endl;
@@ -378,4 +398,8 @@ void main()
 	    //////////////////////////////////////////////////////////////////////////////////////
 		
 	}
+	system("cls");
+	enti::cout << enti::Color::LIGHTMAGENTA << "HA GANADO EL JUGADOR 2!" << enti::endl;
+	enti::cout << enti::cend;
+	enti::systemPause();
 }
