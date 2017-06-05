@@ -9,11 +9,6 @@
 
 
 
-bool Player::undoneMovement()
-{
-	return undone;
-}
-
 Player::Player(Map m, char a) : map(m)
 {
 	lastmovement = '0';
@@ -736,6 +731,21 @@ char Player::lastMovement()
 void Player::resetMovement()
 {
 	lastmovement = '0';
+}
+
+void Player::increaseMovements()
+{
+	movimientos++;
+}
+
+void Player::increaseFatiga()
+{
+	fatiga++;
+}
+
+int Player::playerMovements()
+{
+	return movimientos;
 }
 
 

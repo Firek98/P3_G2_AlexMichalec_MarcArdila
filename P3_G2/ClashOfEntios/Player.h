@@ -18,13 +18,12 @@ class Player
 	bool moved;
 	char lastmovement;
 	int arrows;
+	int fatiga;
+	int movimientos;
 
 public:
 
-	bool undoneMovement();
 	bool turno;
-	int fatiga;
-	int movimientos;
 	Player(Map m, char a);
 	~Player();
 	void movement(enti::InputKey tecla);
@@ -46,7 +45,9 @@ public:
 	void resetFatiga();
 	char lastMovement();
 	void resetMovement();
-
+	void increaseMovements();
+	void increaseFatiga();
+	int playerMovements();
 	
 
 };
